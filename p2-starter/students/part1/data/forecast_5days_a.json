@@ -122,7 +122,7 @@
         "HasPrecipitation": false,
         "ShortPhrase": "Sun, some clouds",
         "LongPhrase": "Sunshine mixing with some clouds",
-        "PrecipitationProbability": 1,
+        "Precipitatio[nProbability": 1,
         "ThunderstormProbability": 0,
         "RainProbability": 1,
         "SnowProbability": 0,
