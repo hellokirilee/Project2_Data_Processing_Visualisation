@@ -21,4 +21,4 @@ print(d)
     """Day 1, get temp
         max_mean_calc = max_mean_calc + max_temp_c    
         if max_temp_c > highest_temp
-            highest_temp = max_temp_c
+            highest_temp = max_temp_c"""
