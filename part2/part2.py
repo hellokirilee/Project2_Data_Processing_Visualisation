@@ -41,9 +41,6 @@ def process_weather(forecast_file):
 
 process_weather('data/forecast_5days_b.json')
 
-# pio.templates.default = "plotly_dark"
-
-# print(forecast)
 fig1 = px.line(
     forecast,
     x= "date",
@@ -63,24 +60,6 @@ fig1.update_traces(mode="lines+markers")
 
 fig1.show()
 
-# fig2 = px.line(
-#     forecast,
-#     x="date",
-#     y= ["min", "minrf", "minrfshade"],
-#     title="Forecast Minimums",
-#     labels={
-#     "date": "Date"}
-    
-# )
-# fig1.update_layout(
-#     template = "plotly_dark",
-#     yaxis_title = "Temperature (C)",
-#     legend_title = "Minimums",
-
-# )
-
-
-
 fig2 = px.line(
     forecast,
     x= "date",
@@ -98,19 +77,4 @@ fig2.update_layout(
 
 fig2.update_traces(mode="lines+markers")
 
-
-
-
 fig2.show()
-
-
-
-# df = px.data.iris()
-# fig = px.scatter(df, x="sepal_length", y="sepal_width", color="species",
-#                  labels={
-#                      "sepal_length": "Sepal Length (cm)",
-#                      "sepal_width": "Sepal Width (cm)",
-#                      "species": "Species of Iris"
-#                  },
-#                 title="Manually Specified Labels")
-# fig.show()
