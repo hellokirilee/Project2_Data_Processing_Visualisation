@@ -62,7 +62,7 @@ def process_weather(forecast_file):
         max_mean_calc = max_mean_calc + max_temp_c
         #returns calculated & formatted mean
         high_mean = calculate_mean(max_mean_calc, num_items)
-        #determines lowest temp & day
+        #determines highest temp & day
         if max_temp_c > highest_temp:
             highest_temp = max_temp_c
             high_day = (date)
