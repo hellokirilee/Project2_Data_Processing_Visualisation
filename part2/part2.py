@@ -63,13 +63,42 @@ fig1.update_traces(mode="lines+markers")
 
 fig1.show()
 
+# fig2 = px.line(
+#     forecast,
+#     x="date",
+#     y= ["min", "minrf", "minrfshade"],
+#     title="Forecast Minimums",
+#     labels={
+#     "date": "Date"}
+    
+# )
+# fig1.update_layout(
+#     template = "plotly_dark",
+#     yaxis_title = "Temperature (C)",
+#     legend_title = "Minimums",
+
+# )
+
+
+
 fig2 = px.line(
     forecast,
-    x="date",
+    x= "date",
     y= ["min", "minrf", "minrfshade"],
-    title="Forecast Minimums"
+    title="Forecast",
+    labels={
+    "date": "Date"})
+
+fig2.update_layout(
+    template = "plotly_dark",
+    yaxis_title = "Temperature (C)",
+    legend_title = "Temperature",
+
 )
-# fig.show()
+
+fig2.update_traces(mode="lines+markers")
+
+
 
 
 fig2.show()
