@@ -20,6 +20,12 @@ def convert_f_to_c(temp_in_farenheit):
     
 def calculate_mean(total, num_items):
         x = total/num_items
+        mean = round(x,1)
+
+        return (mean)
+
+def calc_mean(total, num_items):
+        x = total/num_items
         format_mean = round(x,1)
         mean = format_temperature(format_mean)
         return (mean)
@@ -27,12 +33,13 @@ def calculate_mean(total, num_items):
 def process_weather(forecast_file):
     with open(forecast_file) as json_file:
         json_data = json.load(json_file)
-        highest_temp = 0
-        lowest_temp = 50
-        max_mean_calc = 0
-        min_mean_calc = 0
-        num_items = 0
-        line = []
+
+    highest_temp = 0
+    lowest_temp = 50
+    max_mean_calc = 0
+    min_mean_calc = 0
+    num_items = 0
+    line = []
 
     for weather in json_data['DailyForecasts']:
         #gather number of days, and dates
@@ -46,7 +53,7 @@ def process_weather(forecast_file):
         #adds values to preform calc
         min_mean_calc = min_mean_calc + min_temp_c
         #returns calculated & formatted mean
-        low_mean = calculate_mean(min_mean_calc, num_items)
+        low_mean = calc_mean(min_mean_calc, num_items)
 
         #determines lowest temp & day
         if min_temp_c < lowest_temp:
@@ -61,22 +68,20 @@ def process_weather(forecast_file):
         #adds values to preform calc
         max_mean_calc = max_mean_calc + max_temp_c
         #returns calculated & formatted mean
-        high_mean = calculate_mean(max_mean_calc, num_items)
-        #determines highest temp & day
+
+        high_mean = calc_mean(max_mean_calc, num_items)
+        #determines lowest temp & day
         if max_temp_c > highest_temp:
             highest_temp = max_temp_c
             high_day = (date)
             high_day_temp = format_temperature(max_temp_c)
 
 
-        with open("test.txt", "w") as txt_file:
-            txt_file.write(f"{num_items} Day Overview \n")
-            txt_file.write(f"\tThe lowest temperature will be {low_day_temp}, and will occour on {low_day}.\n")
-            txt_file.write(f"\tThe highest temperature will be {high_day_temp}, and will occour on {high_day}.\n")
-            txt_file.write(f"\tThe average low this week is {low_mean}.\n")
-            txt_file.write(f"\tThe average high this week is {high_mean}.\n\n")
-
-
+    output_string = f"""{num_items} Day Overview
+    The lowest temperature will be {low_day_temp}, and will occur on {low_day}.
+    The highest temperature will be {high_day_temp}, and will occur on {high_day}.
+    The average low this week is {low_mean}.
+    The average high this week is {high_mean}.\n"""
     with open("test.txt", "a") as txt_file: 
         for weather in json_data['DailyForecasts']:
             min_temp_f = (weather["Temperature"]["Minimum"]["Value"])
@@ -91,14 +96,25 @@ def process_weather(forecast_file):
             rain_chance_pm = (weather["Night"]["RainProbability"])
             max_temp = format_temperature(max_temp_c)
             min_temp = format_temperature(min_temp_c)
-            
-            txt_file.write(f"-------- {date} --------\n")
-            txt_file.write(f"Minimum Temperature: {min_temp}\n")
-            txt_file.write(f"Maximum Temperature: {max_temp}\n")
-            txt_file.write(f"Daytime: {long_boy} \n\tChance of rain:\t {rain_chance}%\n")
-            txt_file.write(f"Nighttime: {long_boy_pm} \n\tChance of rain:\t {rain_chance_pm}%\n\n")
 
-    # txt_file.close()
+            output_string += f"""
+-------- {date} --------
+Minimum Temperature: {min_temp}
+Maximum Temperature: {max_temp}
+Daytime: {long_boy}
+    Chance of rain:  {rain_chance}%
+Nighttime: {long_boy_pm}
+    Chance of rain:  {rain_chance_pm}%\n"""
 
 
-process_weather('data/forecast_5days_b.json')
+
+
+    output_string += "\n"
+    return output_string
+
+    with open("test.txt", "w") as txt_file:
+        txt_file.write(output_string)
+
+
+if __name__ == "__main__":
+    print(process_weather("data/forecast_10days.json"))
