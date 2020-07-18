@@ -59,7 +59,7 @@ fig1.update_layout(
 fig1.update_traces(mode="lines+markers")
 
 fig1.show()
-
+#minrf & minrfshade actually have same values - may look like one line in graph
 fig2 = px.line(
     forecast,
     x= "date",
