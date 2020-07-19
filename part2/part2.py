@@ -35,16 +35,16 @@ def process_weather(forecast_file):
         real_feel_shade = (weather["RealFeelTemperatureShade"]["Minimum"]["Value"])
         rfminshade = convert_f_to_c(real_feel_shade)
        
-        days = {'date': date, 'max': max_temp_c, 'min': min_temp_c, 'minrf':rfmin, 'minrfshade':rfminshade}
+        days = {'Date': date, 'Maximum': max_temp_c, 'Minimum': min_temp_c, 'Minimum Real Feel':rfmin, 'Minimum Real Feel Shade':rfminshade}
 
         forecast.append (days)
 
 process_weather('data/forecast_5days_b.json')
 
 fig1 = px.line(
-    forecast,
-    x= "date",
-    y= ["min", "max"],
+    forecast,  
+    x= "Date",
+    y= ["Minimum", "Maximum"],
     title="Forecast",
     labels={
     "date": "Date"})
@@ -62,8 +62,8 @@ fig1.show()
 #minrf & minrfshade actually have same values - may look like one line in graph
 fig2 = px.line(
     forecast,
-    x= "date",
-    y= ["min", "minrf", "minrfshade"],
+    x= "Date",
+    y= ["Minimum", "Minimum Real Feel", "Minimum Real Feel Shade"],
     title="Forecast",
     labels={
     "date": "Date"})
